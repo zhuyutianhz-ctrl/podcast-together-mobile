@@ -1,0 +1,12 @@
+{
+  "name": "podcast-together",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A lightweight shared podcast listening room for mobile browsers.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
