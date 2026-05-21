@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0c6b5f" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="一起听播客" />
+    <title>一起听播客</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icon.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="room-panel" aria-label="同步听播客房间">
+        <div class="topbar">
+          <div>
+            <p class="eyebrow">一起听播客</p>
+            <h1 id="roomTitle">房间</h1>
+          </div>
+          <button class="icon-button" id="shareButton" type="button" aria-label="分享房间链接" title="分享房间链接">
+            <span aria-hidden="true">↗</span>
+          </button>
+        </div>
+
+        <div class="status-row">
+          <span id="connectionState">连接中</span>
+          <span id="listenerCount">0 人在线</span>
+        </div>
+
+        <form class="source-form" id="sourceForm">
+          <label for="sourceInput">播客 RSS、单集网页或音频链接</label>
+          <div class="input-row">
+            <input
+              id="sourceInput"
+              name="source"
+              type="url"
+              inputmode="url"
+              placeholder="https://..."
+              autocomplete="off"
+              required
+            />
+            <button type="submit">解析</button>
+          </div>
+          <p class="hint">小宇宙分享页不一定暴露音频；RSS 或 mp3/m4a 链接最稳定。</p>
+        </form>
+
+        <section class="episode-picker" id="episodePicker" hidden>
+          <div class="section-heading">
+            <h2 id="feedTitle">选择单集</h2>
+            <button class="text-button" id="closePicker" type="button">收起</button>
+          </div>
+          <div class="episode-list" id="episodeList"></div>
+        </section>
+
+        <section class="player-area" aria-label="播放器">
+          <div class="now-playing">
+            <p id="showTitle">还没有选择播客</p>
+            <h2 id="episodeTitle">粘贴一个链接开始</h2>
+          </div>
+
+          <audio id="audio" preload="metadata"></audio>
+
+          <div class="timeline">
+            <span id="currentTime">0:00</span>
+            <input id="seekBar" type="range" min="0" max="1" value="0" step="0.1" aria-label="播放进度" />
+            <span id="duration">0:00</span>
+          </div>
+
+          <div class="controls">
+            <button class="round-button secondary" id="backButton" type="button" aria-label="后退十五秒" title="后退十五秒">
+              <span aria-hidden="true">↶15</span>
+            </button>
+            <button class="play-button" id="playButton" type="button">播放</button>
+            <button class="round-button secondary" id="forwardButton" type="button" aria-label="前进三十秒" title="前进三十秒">
+              <span aria-hidden="true">30↷</span>
+            </button>
+          </div>
+
+          <div class="sync-row">
+            <button class="text-button" id="readyButton" type="button">准备收听</button>
+            <button class="text-button" id="syncButton" type="button">校准同步</button>
+          </div>
+        </section>
+      </section>
+
+      <section class="notes" aria-label="使用说明">
+        <h2>使用方式</h2>
+        <ol>
+          <li>一个人创建房间后分享链接。</li>
+          <li>两个人都点“准备收听”。</li>
+          <li>任意一方播放、暂停或拖动进度，另一方会自动跟随。</li>
+        </ol>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
